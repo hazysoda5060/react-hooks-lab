@@ -9,3 +9,5 @@ const Poke = (props) => {
         </div>
     )
 }
+
+export default Poke
