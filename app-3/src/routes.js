@@ -5,6 +5,6 @@ import Pokemon from './components/Pokemon'
 export default (
     <Switch>
         <Route exact path='/' component={PokeDex} />
-        <Route path='/pokemon/:id' component={Pokemon} />
+        <Route path='/pokemon/:name' component={Pokemon} />
     </Switch>
 )

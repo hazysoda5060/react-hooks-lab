@@ -1,19 +1,26 @@
-import useAxios from '../hooks/useAxios'
-import Poke from './Poke'
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import axios from 'axios'
 
-const PokeDex = () => {
-    const [pokemon, _setPokemon] = useAxios('https://pokeapi.co/api/v2/pokemon/', 'results')
+const PokemonList = (props) => {
+  const [list, setList] = useState([])
 
-    return (
-        <div>
-            <h1>PokeDex</h1>
-            {pokemon.map(poke => {
-                return (
-                    <Poke key={poke.name} poke={poke}/>
-                )
-            })}
-        </div>
-    )
+  useEffect(() => {
+    axios.get('https://pokeapi.co/api/v2/pokemon').then((res) => {
+      setList(res.data.results)
+    })
+  }, [])
+
+  return (
+    <div>
+      {list.map((pokemon) => {
+        return (
+          <Link key={pokemon.url} to={`/pokemon/${pokemon.name}`}>
+            <h2>{pokemon.name}</h2>
+          </Link>
+        )
+      })}
+    </div>
+  )
 }
-
-export default PokeDex
+export default PokemonList
